@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        canvas {
+            border: 1px solid #000;
+            display: block;
+            margin: 20px auto;
+        }
+    </style>
+    <title>12 Shapes in a Box</title>
+</head>
+<body>
+    <h1 style="text-align: center;">My 12 Shapes in a box</h1>
+    <canvas id="shapesCanvas" width="600" height="500" style="background-color: grey;"></canvas>
+    <script>
+        // Get the canvas and its context
+        const canvas = document.getElementById("shapesCanvas");
+        const ctx = canvas.getContext("2d");
+
+        // Set shape properties
+        const shapeSize = 40;
+        const spacing = 96; // 1 inch in pixels
+        const colors = ["lightblue", "lightgreen", "lightcoral", "lightsalmon", "lightseagreen", "lightsteelblue", "lightpink", "lightyellow", "lightcyan", "lightgoldenrodyellow", "lightgray", "lightcyan"];
+
+        // Draw 12 different shapes
+        for (let i = 0; i < 12; i++) {
+            const row = Math.floor(i / 4);
+            const col = i % 4;
+            const centerX = col * (shapeSize + spacing) + shapeSize / 2 + spacing;
+            const centerY = row * (shapeSize + spacing) + shapeSize / 2 + spacing;
+
+            ctx.beginPath();
+
+            // Different shapes
+            if (i % 12 === 0) {  // Circle
+                ctx.arc(centerX, centerY, shapeSize / 2, 0, 2 * Math.PI);
+            } else if (i % 12 === 1) {  // Square
+                ctx.rect(centerX - shapeSize / 2, centerY - shapeSize / 2, shapeSize, shapeSize);
+            } else if (i % 12 === 2) {  // Triangle
+                ctx.moveTo(centerX - shapeSize / 2, centerY + shapeSize / 2);
+                ctx.lineTo(centerX + shapeSize / 2, centerY + shapeSize / 2);
+                ctx.lineTo(centerX, centerY - shapeSize / 2);
+            } else if (i % 12 === 3) {  // Pentagon
+                for (let j = 0; j < 5; j++) {
+                    const angle = (j * 2 * Math.PI) / 5;
+                    const x = centerX + shapeSize * Math.cos(angle);
+                    const y = centerY + shapeSize * Math.sin(angle);
+                    j === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+                }
+            } else if (i % 12 === 4) {  // Hexagon
+                for (let j = 0; j < 6; j++) {
+                    const angle = (j * 2 * Math.PI) / 6;
+                    const x = centerX + shapeSize * Math.cos(angle);
+                    const y = centerY + shapeSize * Math.sin(angle);
+                    j === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+                }
+            } else if (i % 12 === 5) {  // Octagon
+                for (let j = 0; j < 8; j++) {
+                    const angle = (j * 2 * Math.PI) / 8;
+                    const x = centerX + shapeSize * Math.cos(angle);
+                    const y = centerY + shapeSize * Math.sin(angle);
+                    j === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+                }
+            } else if (i % 12 === 6) {  // Star
+                for (let j = 0; j < 5; j++) {
+                    const angle = (j * 4 * Math.PI) / 5;
+                    const x = centerX + shapeSize * Math.cos(angle);
+                    const y = centerY + shapeSize * Math.sin(angle);
+                    j === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+                }
+            } else if (i % 12 === 7) {  // Diamond
+                ctx.moveTo(centerX, centerY - shapeSize / 2);
+                ctx.lineTo(centerX + shapeSize / 2, centerY);
+                ctx.lineTo(centerX, centerY + shapeSize / 2);
+                ctx.lineTo(centerX - shapeSize / 2, centerY);
+            } else if (i % 12 === 8) {  // Pentagon (second one)
+                for (let j = 0; j < 5; j++) {
+                    const angle = (j * 2 * Math.PI) / 5;
+                    const x = centerX + shapeSize * Math.cos(angle);
+                    const y = centerY + shapeSize * Math.sin(angle);
+                    j === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+                }
+            } else if (i % 12 === 9) {  // Heart
+                ctx.moveTo(centerX, centerY + shapeSize / 4);
+                ctx.quadraticCurveTo(centerX, centerY, centerX + shapeSize / 2, centerY);
+                ctx.quadraticCurveTo(centerX + shapeSize, centerY, centerX + shapeSize, centerY + shapeSize / 4);
+                ctx.lineTo(centerX + shapeSize / 2, centerY + shapeSize);
+                ctx.lineTo(centerX, centerY + shapeSize / 4);
+            } else if (i % 12 === 10) {  // Arrow
+                ctx.moveTo(centerX - shapeSize / 2, centerY - shapeSize / 2);
+                ctx.lineTo(centerX + shapeSize / 2, centerY - shapeSize / 2);
+                ctx.lineTo(centerX + shapeSize / 2, centerY - shapeSize);
+                ctx.lineTo(centerX + shapeSize, centerY);
+                ctx.lineTo(centerX + shapeSize / 2, centerY + shapeSize);
+                ctx.lineTo(centerX + shapeSize / 2, centerY + shapeSize / 2);
+                ctx.lineTo(centerX - shapeSize / 2, centerY + shapeSize / 2);
+            } else if (i % 12 === 11) {  // Scalene
+                ctx.moveTo(centerX - shapeSize / 2, centerY + shapeSize / 2);
+                ctx.lineTo(centerX + shapeSize / 2, centerY + shapeSize / 2);
+                ctx.lineTo(centerX + shapeSize / 4, centerY - shapeSize / 2);
+            }
+
+            // Set shape color
+            ctx.fillStyle = colors[i];
+            ctx.fill();
+            ctx.closePath();
+        }
+    </script>
+    <footer style="text-align: center;"><b>By: Clark Sildo</b></footer>
+</body>
+</html>
